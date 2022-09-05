@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "f7f2b9b2-2cd2-47a3-ab15-6b68c7028703",
+		"name": "loginJWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21885750"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer010D584FC0FDB1238EC718087F75778086DC26C3AA1437C193EE257D3853B296399EBAE630A0E9EFEA4FC9C6BE9CE9B5F33690CBB2B033EEAFF46CB47CE0E4FA2317F7BE49D8ABD645B2E12ADD35AC87F42766B046F1C2F73581101E23779557DE5FC2F152EED7E33E993B934B6ECF5E39AA09D7044B45802F3ED303244BF712A9C441D2C7349AC657E1916BF2B3DF38A637D13BE931BF7B83BA3D3BB9ACB4C5B2A67229B1187FCA77139379CA3A7D4E6314774C3EAA005804EF132C5E602E6074474849C839662FAE846148C41C45F224E00761EDF30418254BF857587BD6BCC3A1B9ADFD2AD0A36A366F7EA252000C559515F0767D92EEE7D49B31BB7AF4CA27796ED63DFBF43B2D16669F174840A6B4EDC3F14D0DB9606A87CAFDFE55FC3DFBA9367FE2D8645A1AE5B0F39440E566ACADC1327F5B1E5F57458C47522DE871F386108C718242BCA6E33609C949F5B158CE71AD5CB59053FD8EEDE57FBAD68F943B9E30F795A0A50DAE637201072A56B562EA8E9A628212375ABDC860C6991CA2AAE8106A8F9D13EF6C2A6F74985B3D280ED688DEBB",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "vito",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/token/refresh",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer01273A3AFD2AC60E09A1FFD8BF06569D7A9E5C73A246B0D07B272D6DC6D63ED8FE07A65D9974A85DB5880B8DF813A715C8BDADB880954EE0341D485416710B44A672E84D5FE317FCDFB1670446D5E82EBA4F4D2D2D6C54A26A0C4688BADE0712625BA83E4A438FB9A84EC3F3869725D524DF438E5FD4C748D568784152D3C191E90C9C8C1BA4664975F1E3B2D0F9A0DC56D8BD1BF8E15901D6AEE06AB1224C0641E26CF5E102D08C25B724F48A2D422B4CE0D6070FA1C215C36274F1CFB6A5502F4A546543490AE716B26F407C476DD3116938FB0A33105F1EE06CC94A9997525360B4CDC6064DC97246508C24F8051DB1FF0DB2633718F18BD09B4BE9D47A5E47E629C9C1F2FD977A3872E41EE8575CA925A0AEE8F6A84C786DC1D037BECF5D151CE93BED51AD46FA672979860169AF5AC211312229ADD362FE26358DE0E99F66BC",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/token/refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"token",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/user/save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"nino\",\r\n\"password\":\"1234\",\r\n\"name\":\"nikola maio\",\r\n\"email\":\"xxreydyganxx@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/registration",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/role/addrole",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"nikola\",\r\n\"rolename\":\"ROLE_ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/role/addroletouser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"role",
+						"addroletouser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/role/newrole",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer0124B569F2AE7F0ABCB20C751BDF078FD81616B72167360FACAAD4155DF92ABE0DA63C29B4892855E378B69AA2C69732A1E361FBC2CEDA81C48ACE038D004B4AC2ADD7699E63BFB3575EC1FECCB9EF02D9D766881812BCD1C40988F2A9D6B96816E55D8AF5D3BA29E5AC1084CF74E88EA7C7A5B7681EDF4368422F8AEF3E2FE55676F7A60E5F003756E231306518730C204F123D15821FB34D42693D19B8A4CABFFDED4A4EBB570349166FA15E8ACB8C0E37C928782AEC3F07703B10E50E7901443B798554793D04BD119E6932EC04D00E1CAD716223BBAB718724D1FAC322154FAC63152759D2168C7F2CA823A89D16DFC4CD984A709C6A5F798B6D78744BFCCED1C4FE8C7FE76214CDE239D13B8720D693217267C758C44CDE2EB63BC1F588DD34F9CD7336CFC8320456B2C3DF168644F297766A3A8BF0FCE8E373A5C86EA9D067140B4D18D809700AC5072FE28E1FA901CE8BE56D930FD6D079B2DF04832F38CF271C8901D506DADDB1B8D5FB38FB943066F10F4191E4ACAA3B295D76F1BFCBC738E11EC11575D0EF6A69429041F7C08F2C4DBA8F",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"pepega\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/role/newrole",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"role",
+						"newrole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/user/registration/sendagain",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer0156CEA5034A98D37D9B89E6E9D42B66EF729D680EEFCBC91F77E29D8AFA95F24D231967A397DFF1A0E4D426898E57689393FFDB2CBF055B35C5BD4D6BADD0F915AB6E1482E794810ECF45696D822522A4FD1528661B9784D7919EAE6CB6085600F528F88D84307E1A203C950B919112FF21CC62E67159540092A02C399E9C5EE4D8567D86961C63B0AB3D47A612B18389FF6949327650FB1A22B9EF346DE5DE9BFAA913BC747E0E093C036EFE81554F747E5769624111E353F19D12CE5367D87434AD02ABE5004A2A00D497723858ABC9FDACBAF0C6C53F0904BC2A8123B5FF5F8DEB0EDFAA569167BDC10C3AE1AA3508700CF74C8F33B56BD4ADCC99D27145A8A3E8EB28BE31B0C9161103D985494A5DF2BF69D60FCE86A9737C96ACD6623046501E2E7F81246366BEBB4970075CFCBAFE9DF64F36AF94AA8725AD94D56C61FEDAEBA5F5255BB8912BE50A826ECF9AB0ECC268D563F98CF6765DA8A6FCC5CD1C802147D169C6E3BDFE011B54B9F9904022DCC8827FE9A751BCA9C0D218E17A9B5926FB14E6BF2567A7EBC48713",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/user/guest/sendagain",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"guest",
+						"sendagain"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

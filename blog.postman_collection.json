@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "b933f397-afc3-4720-857e-b30ffd114f26",
+		"name": "blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21885750"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/blog/home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/blog/home",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/blog/topic?id=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/blog/topic?idtopic=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"topic"
+					],
+					"query": [
+						{
+							"key": "idtopic",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/blog/topic/post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer013682C74550CEEA532068D40047DE533855EC5697C86739BB51294AAACDEFFF9CB42AB3AACD50A643C3E4AEB5033FF86682FEAEC912C38AB214A79DD0E73EC518C4312D86FB81081E7A4854FB84776FF237DE8F06B0AFF07781973A8A8E8E06B2C4B3AB110DC49ADFD2EC829B18F7B13770477C6F64D00378004DA7B89846416E01707601E240BF86AC26DDD748A16348221CDC0F6685CF9323E5F6D65AC553238F3F302F5B7C7F68CFF11E11C34EBE6A0B4D388287D7770A8ECD98EC0BAE16DFAF5C65F8690E7661B401A02FB81594DA592225CF5FA5C31B9E8E6951605AB07CBB735E79C9E3D3349A05D00691BC179BC936F908B572AC191DE00A991B5060B7C342487CB9F23A29A19E141A6303A5BD96A3FC708E2211CF5EF2DC0E34EDA4EF2F6E536DE4C89E377B3833EAB0E0B920CC0DFB111E592D6BB7F53AC58B002BA2BB8CBC18521667B98342D71B29CABFD95EE5B02B6845442A092CE79CEA2726CD90D19433F18541861B18D5022E5DD8D58D3B2915176074C6D5956FF2A58A104BC608AFA89C3779C2B39945EC4E0E16453EA256B6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titolo\":\"Nuova notizia\",\r\n    \"testo\":\"il blog di vito ha troppi bug\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/blog/topic/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"topic",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/blog/post/modified",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer013682C74550CEEA532068D40047DE533855EC5697C86739BB51294AAACDEFFF9CB42AB3AACD50A643C3E4AEB5033FF86682FEAEC912C38AB214A79DD0E73EC518C4312D86FB81081E7A4854FB84776FF237DE8F06B0AFF07781973A8A8E8E06B2C4B3AB110DC49ADFD2EC829B18F7B13770477C6F64D00378004DA7B89846416E01707601E240BF86AC26DDD748A16348221CDC0F6685CF9323E5F6D65AC553238F3F302F5B7C7F68CFF11E11C34EBE6A0B4D388287D7770A8ECD98EC0BAE16DFAF5C65F8690E7661B401A02FB81594DA592225CF5FA5C31B9E8E6951605AB07CBB735E79C9E3D3349A05D00691BC179BC936F908B572AC191DE00A991B5060B7C342487CB9F23A29A19E141A6303A5BD96A3FC708E2211CF5EF2DC0E34EDA4EF2F6E536DE4C89E377B3833EAB0E0B920CC0DFB111E592D6BB7F53AC58B002BA2BB8CBC18521667B98342D71B29CABFD95EE5B02B6845442A092CE79CEA2726CD90D19433F18541861B18D5022E5DD8D58D3B2915176074C6D5956FF2A58A104BC608AFA89C3779C2B39945EC4E0E16453EA256B6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":3,\r\n    \"testo\":\"il testo e stato modificato\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/blog/post/modified",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"post",
+						"modified"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/blog/topic/comment/modifica",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":2,\r\n    \"testo\":\"il commento e stato modificato\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/blog/topic/comment/modifica",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"topic",
+						"comment",
+						"modifica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/blog/topic/delete/topic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer0146521373D7E024491A81DC387EF70489637BDFC7AB3DCE04B9E3359DE8D83ADE26EA4E45314DA2E87D37062E52E01DDEC7D487709D134051A456F71DEE066F8533596A66C4B8EF961DFD64BA6CB3BDB46309AFAA1469F30DB2DD00EA6718822250B900892B500C2BF0A1B7A1954FD6B094C35F0BEFB3359F66576EEAD07A21E7B02CD2B279A0CC88B7B90B357C4F9AE12452C7BBEB8B02CA820A6BBB9FD12D3BFEAEEE869309D4A8A77D2A73746C32C497A67D22AE744D2525650ACD9BEA60319C5BA2F8C5ED9C8C05F6E12645B994BC782E137D14EC3C37B03D7DCFE50EEACB3F27EF39B9A95CF607DA636B20081BCC5C9C69ACAAF843EE43DF9C7A236B68A5DAD5152BE3DFEF7EBA484A0C9CDFFF515C13949623C55FA9950B7461257098C7BB8FC0F0CCAF18CED42740AE4AE78CFD015C815BD6B223FA1C02699BA0AB42D1EF29CDA4C2BB07E60BDBB1C60FC557DC6DE0A12AF078F585A3861A06BCA5F6BE4E509FB908937BF64FF61BA30E0C05C34C3637EED95A65B0FC8ACED4D73FE3977EE58877E92565DF1BB92AD28F9EC4976A9E0229B6",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/blog/topic/delete/topic?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"topic",
+						"delete",
+						"topic"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
