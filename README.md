@@ -5,6 +5,7 @@ Importante se vuoi provare il progetto settare come variabile d'ambiente  emailp
 src/main/java/Blog/security/EmailConfig.java "javaMailSender.setUsername("TUAEMAIL@gmail.com");" 
 
 COLLECTION di postman pronte per fare i test sul applicazione,basta importarle per avere tutto giá pronto :)
+
 blog.postman_collection.json
 
 loginJWT.postman_collection.json
