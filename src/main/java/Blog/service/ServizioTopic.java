@@ -55,6 +55,13 @@ public class ServizioTopic {
 
 
 
+    public int deleteTopic(Long id) {
+        int risultato= topicRepository.DeleteTopic(id);
+        return risultato;
+    }
+
+
+
 
 
 

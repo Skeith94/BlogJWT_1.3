@@ -103,6 +103,24 @@ public class BlogResource {
 
 
 
+    @PostMapping("/blog/topic/delete/topic")
+    public ResponseEntity<String> eliminaTopic(@RequestParam("id") Long id){
+        int risultato=servizioTopic.deleteTopic(id);
+        if(risultato==0){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body("topic con id "+id+" cancellato");
+    }
+
+
+    @PostMapping("/blog/topic/delete/commento")
+    public ResponseEntity<String> eliminaCommento(@RequestParam("id") Long id){
+        int risultato=servizioCommenti.CancellaCommento(id);
+        if(risultato==0){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body("commento con id "+id+" cancellato");
+    }
 
 
     @AllArgsConstructor

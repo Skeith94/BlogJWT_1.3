@@ -28,6 +28,12 @@ public interface CommentiRepository extends CrudRepository<Commenti,Long> {
    int ModificaCommento(String testo, Long id);
 
 
+   @Transactional
+   @Modifying
+   @Query("delete from Commenti c where c.id = ?1")
+   int CancellaCommento(Long id);
+
+
 
 }
 

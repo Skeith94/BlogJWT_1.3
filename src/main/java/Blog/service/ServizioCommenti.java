@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +26,10 @@ public class ServizioCommenti {
 
     public ArrayList<Commenti> findBytopic_id(long topicId) {
         ArrayList<Commenti>commenti= commentiRepository.getCommentiByTopicId(topicId);
-        for(int i=0; i<commenti.size(); i++) {
-            commenti.get(i).getUser().setName("");
-            commenti.get(i).getUser().setPassword("");
-            commenti.get(i).getUser().setEmail("");
+        for (Commenti value : commenti) {
+            value.getUser().setName("");
+            value.getUser().setPassword("");
+            value.getUser().setEmail("");
         }
         return commenti;
     }
@@ -42,6 +41,11 @@ public class ServizioCommenti {
 
     public int ModificaCommento(String testo, Long id){
         return commentiRepository.ModificaCommento(testo,id);
+    }
+
+
+    public int CancellaCommento(long id){
+        return commentiRepository.CancellaCommento(id);
     }
 
 

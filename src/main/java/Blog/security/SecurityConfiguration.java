@@ -35,7 +35,7 @@ public class SecurityConfiguration {
         http.authorizeRequests().antMatchers( "/blog/topic/comment/**").hasAnyRole("SUPER_ADMIN","ADMIN","SCRITTORE","USER");
         http.authorizeRequests().antMatchers( "/api/user/guest/sendagain").hasRole("GUEST");
         http.authorizeRequests().antMatchers( "/api/role/**").hasRole("SUPER_ADMIN");
-        http.authorizeRequests().antMatchers( "/api/user").hasAnyRole("SUPER_ADMIN","ADMIN");
+        http.authorizeRequests().antMatchers( "/api/user","/blog/topic/delete/**").hasAnyRole("SUPER_ADMIN","ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.apply(myCustomAuthenticationManager());
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
