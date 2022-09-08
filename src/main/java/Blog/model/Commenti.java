@@ -37,15 +37,10 @@ public class Commenti {
     private LocalDateTime modifiedAt;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private  User user;
 
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     private Topic topic;
-
-
-
 
 }

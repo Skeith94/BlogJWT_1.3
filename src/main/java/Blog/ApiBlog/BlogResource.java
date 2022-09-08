@@ -1,6 +1,8 @@
 package Blog.ApiBlog;
 
 
+import Blog.Projection.SingleTopicInfo;
+import Blog.Projection.TopicInfo;
 import Blog.model.Commenti;
 import Blog.model.Topic;
 import Blog.model.User;
@@ -14,9 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +35,22 @@ public class BlogResource {
 
 
     @GetMapping("/blog/home")
-    public ResponseEntity<List<Topic>> getTopics() {
-        return ResponseEntity.ok(servizioTopic.getTopicsAndUserName());
+    public ResponseEntity<List<TopicInfo>> getTopics() {
+        return ResponseEntity.ok( servizioTopic.getTopicsAndUserName());
     }
 
 
     @GetMapping("/blog/topic")
-    public   ResponseEntity<Topic> topic(@RequestParam("idtopic") Long id) {
-    return ResponseEntity.ok(servizioTopic.findById(id));
+    public   ResponseEntity<SingleTopicInfo> topic(@RequestParam("idtopic") Long id) {
+        SingleTopicInfo topic = servizioTopic.trovaSingleTopic(id);
+        if(topic==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(topic);
     }
 
     @PostMapping("/blog/topic/post")
     public   ResponseEntity<String> topic(@RequestBody TopicForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/blog/topic/post").toUriString());
         User loggato= servizioUser.getUser(username);
         Topic topic = new Topic(null,form.getTitolo(), form.getTesto(), LocalDateTime.now(),null,loggato,new ArrayList<>());
        Topic risultato= servizioTopic.saveTopic(topic);
@@ -59,9 +62,8 @@ public class BlogResource {
 
     @PostMapping("/blog/topic/comment")
     public   ResponseEntity<String> comment(@RequestBody CommentForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/blog/topic/post").toUriString());
         User loggato= servizioUser.getUser(username);
-        Topic topic=servizioTopic.findById(form.id);
+        Topic topic=servizioTopic.findById(form.getId());
         Commenti commenti=new Commenti(null, form.testo, LocalDateTime.now(),null,loggato,topic);
         Commenti risultato= servizioCommenti.saveCommenti(commenti);
         if(risultato==null) {
@@ -74,8 +76,6 @@ public class BlogResource {
     @PostMapping("/blog/post/modified")
     public   ResponseEntity<String> Updatetopic(@RequestBody CommentForm form) {
 
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/blog/post/modified").toUriString());
-
         int risultato= servizioTopic.UpdateTopic(form.getTesto(),LocalDateTime.now(),form.getId());
         if(risultato==0) {
             return ResponseEntity.internalServerError().body("id non trovato");
@@ -87,16 +87,14 @@ public class BlogResource {
 
     @PostMapping("/blog/topic/comment/modifica")
     public   ResponseEntity<String> modificacomment(@RequestBody CommentForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/blog/topic/comment/modifica").toUriString());
         User loggato= servizioUser.getUser(username);
-        Topic topic=servizioTopic.findById(form.id);
         boolean risultato= servizioCommenti.checkIFscrittore(form.getId(),loggato.getId());
         if(risultato==false) {
-            return ResponseEntity.internalServerError().body("errore");
+            return ResponseEntity.internalServerError().body("solo chi ha scritto il commento puo modificarlo");
         }
         int risultatoModifica= servizioCommenti.ModificaCommento(form.getTesto(),form.id);
         if(risultatoModifica==0) {
-            return ResponseEntity.internalServerError().body("errore");
+            return ResponseEntity.internalServerError().body("commento non modificato");
         }
         return ResponseEntity.ok().build();
     }
