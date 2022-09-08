@@ -52,7 +52,7 @@ public class BlogResource {
     @PostMapping("/blog/topic/post")
     public   ResponseEntity<String> topic(@RequestBody TopicForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
         User loggato= servizioUser.getUser(username);
-        Topic topic = new Topic(null,form.getTitolo(), form.getTesto(), LocalDateTime.now(),null,loggato,new ArrayList<>());
+        Topic topic = new Topic(null,form.getTitolo(), form.getTesto(), LocalDateTime.now(),null,loggato,new ArrayList<>(), form.getTestoAnteprima());
        Topic risultato= servizioTopic.saveTopic(topic);
        if(risultato==null) {
            return ResponseEntity.internalServerError().build();
@@ -126,6 +126,7 @@ public class BlogResource {
     static class TopicForm{
         private String titolo;
         private String testo;
+        private String testoAnteprima;
     }
 
     @AllArgsConstructor

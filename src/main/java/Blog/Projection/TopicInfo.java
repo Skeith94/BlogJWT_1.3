@@ -17,6 +17,8 @@ public interface TopicInfo {
 
     LocalDateTime getModifiedAt();
 
+    String getAnteprima();
+
     UserInfo getUser();
 
     /**

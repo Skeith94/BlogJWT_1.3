@@ -73,13 +73,13 @@ public class loginapplication {
             userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
             User uservito=new User(null, "vito malato", "vito", "1234", new ArrayList<>(),"vito@gmail.com");
-            Topic topicvito=new Topic(null,"primo topic","speriamo funziona", LocalDateTime.now(),null,uservito,new ArrayList<>());
+            Topic topicvito=new Topic(null,"primo topic","speriamo funziona", LocalDateTime.now(),null,uservito,new ArrayList<>(),"testo anteprima primo topic");
             userService.saveUser(uservito);
             servizioTopic.saveTopic(topicvito);
 
             User userdanilo=new User(null, "danilo bella", "danilo", "1234", new ArrayList<>(),"danilo@gmail.com");
             userService.saveUser(userdanilo);
-            Topic topicdanilo=new Topic(null,"topic danilo","io lo faccio meglio xD", LocalDateTime.now(),null,userdanilo,new ArrayList<>());
+            Topic topicdanilo=new Topic(null,"topic danilo","io lo faccio meglio xD", LocalDateTime.now(),null,userdanilo,new ArrayList<>(),"testo anteprima topic danilo");
             servizioTopic.saveTopic(topicdanilo);
 
             User usermilos=new User(null, "ricardo milos", "milos", "1234", new ArrayList<>(),"milos@gmail.com");

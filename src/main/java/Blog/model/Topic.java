@@ -54,4 +54,6 @@ public class Topic {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Commenti> commenti;
 
+    private String Anteprima;
+
 }
