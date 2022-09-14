@@ -33,13 +33,13 @@ public class BlogResource {
 
     private final ServizioCommenti servizioCommenti;
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/blog/home")
     public ResponseEntity<List<TopicInfo>> getTopics() {
         return ResponseEntity.ok( servizioTopic.getTopicsAndUserName());
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/blog/topic")
     public   ResponseEntity<SingleTopicInfo> topic(@RequestParam("idtopic") Long id) {
         SingleTopicInfo topic = servizioTopic.trovaSingleTopic(id);
@@ -49,17 +49,18 @@ public class BlogResource {
         return ResponseEntity.ok(topic);
     }
 
+    @CrossOrigin
     @PostMapping("/blog/topic/post")
     public   ResponseEntity<String> topic(@RequestBody TopicForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
         User loggato= servizioUser.getUser(username);
-        Topic topic = new Topic(null,form.getTitolo(), form.getTesto(), LocalDateTime.now(),null,loggato,new ArrayList<>(), form.getTestoAnteprima());
+        Topic topic = new Topic(null,form.getTitolo(), form.getTesto(), LocalDateTime.now(),null,loggato,new ArrayList<>(), form.getTestoAnteprima(),0);
        Topic risultato= servizioTopic.saveTopic(topic);
        if(risultato==null) {
            return ResponseEntity.internalServerError().build();
        }
         return ResponseEntity.ok().build();
     }
-
+    @CrossOrigin
     @PostMapping("/blog/topic/comment")
     public   ResponseEntity<String> comment(@RequestBody CommentForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
         User loggato= servizioUser.getUser(username);
@@ -72,7 +73,7 @@ public class BlogResource {
         return ResponseEntity.ok().build();
     }
 
-
+    @CrossOrigin
     @PostMapping("/blog/post/modified")
     public   ResponseEntity<String> Updatetopic(@RequestBody CommentForm form) {
 
@@ -84,7 +85,7 @@ public class BlogResource {
     }
 
 
-
+    @CrossOrigin
     @PostMapping("/blog/topic/comment/modifica")
     public   ResponseEntity<String> modificacomment(@RequestBody CommentForm form,@CurrentSecurityContext(expression="authentication?.name") String username) {
         User loggato= servizioUser.getUser(username);
@@ -100,7 +101,7 @@ public class BlogResource {
     }
 
 
-
+    @CrossOrigin
     @PostMapping("/blog/topic/delete/topic")
     public ResponseEntity<String> eliminaTopic(@RequestParam("id") Long id){
         int risultato=servizioTopic.deleteTopic(id);
@@ -110,7 +111,7 @@ public class BlogResource {
         return ResponseEntity.ok().body("topic con id "+id+" cancellato");
     }
 
-
+    @CrossOrigin
     @PostMapping("/blog/topic/delete/commento")
     public ResponseEntity<String> eliminaCommento(@RequestParam("id") Long id){
         int risultato=servizioCommenti.CancellaCommento(id);
@@ -120,7 +121,7 @@ public class BlogResource {
         return ResponseEntity.ok().body("commento con id "+id+" cancellato");
     }
 
-
+    @CrossOrigin
     @AllArgsConstructor
     @Data
     static class TopicForm{
@@ -128,7 +129,7 @@ public class BlogResource {
         private String testo;
         private String testoAnteprima;
     }
-
+    @CrossOrigin
     @AllArgsConstructor
     @Data
     static class CommentForm{

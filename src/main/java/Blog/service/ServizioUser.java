@@ -134,4 +134,8 @@ public class ServizioUser implements UserDetailsService {
         user.getRoles().remove(role);
     }
 
+    public void createTrigger(){
+        userRepository.createTrigger();
+    }
+
 }

@@ -21,6 +21,8 @@ public interface SingleTopicInfo {
 
     Collection<CommentiInfo> getCommenti();
 
+
+
     /**
      * A Projection for the {@link Blog.model.User} entity
      */

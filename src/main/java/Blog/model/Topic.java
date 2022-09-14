@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 
 @Entity
@@ -34,7 +36,7 @@ public class Topic {
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = SEQUENCE,
             generator = "topic_sequence"
     )
     private Long id;
@@ -55,5 +57,7 @@ public class Topic {
     private List<Commenti> commenti;
 
     private String Anteprima;
+
+   private long NumeroCommenti;
 
 }

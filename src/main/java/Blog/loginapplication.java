@@ -18,15 +18,22 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
 
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 
 //login api JWT #SecurityFilterChain implement #token cryptography #hardened cookie no Token Sidejacking XSS
@@ -58,14 +65,29 @@ public class loginapplication {
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
+
+
+
            
         SpringApplication.run(loginapplication.class, args);
 
     }
 
     @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
+    @Bean
     CommandLineRunner run(ServizioUser userService, ServizioTopic servizioTopic, ServizioCommenti servizioCommenti) {
         return args -> {
+            userService.createTrigger();
             userService.saveRole(new Role(null, "ROLE_GUEST"));
             userService.saveRole(new Role(null, "ROLE_USER"));
             userService.saveRole(new Role(null, "ROLE_SCRITTORE"));
@@ -73,13 +95,13 @@ public class loginapplication {
             userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
             User uservito=new User(null, "vito malato", "vito", "1234", new ArrayList<>(),"vito@gmail.com");
-            Topic topicvito=new Topic(null,"primo topic","speriamo funziona", LocalDateTime.now(),null,uservito,new ArrayList<>(),"testo anteprima primo topic");
+            Topic topicvito=new Topic(null,"primo topic","speriamo funziona", LocalDateTime.now(),null,uservito,new ArrayList<>(),"testo anteprima primo topic",0);
             userService.saveUser(uservito);
             servizioTopic.saveTopic(topicvito);
 
             User userdanilo=new User(null, "danilo bella", "danilo", "1234", new ArrayList<>(),"danilo@gmail.com");
             userService.saveUser(userdanilo);
-            Topic topicdanilo=new Topic(null,"topic danilo","io lo faccio meglio xD", LocalDateTime.now(),null,userdanilo,new ArrayList<>(),"testo anteprima topic danilo");
+            Topic topicdanilo=new Topic(null,"topic danilo","io lo faccio meglio xD", LocalDateTime.now(),null,userdanilo,new ArrayList<>(),"testo anteprima topic danilo",0);
             servizioTopic.saveTopic(topicdanilo);
 
             User usermilos=new User(null, "ricardo milos", "milos", "1234", new ArrayList<>(),"milos@gmail.com");
@@ -107,7 +129,13 @@ public class loginapplication {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
 }
+
+
+
 
 
 
