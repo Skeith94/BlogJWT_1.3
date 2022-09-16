@@ -33,7 +33,7 @@ public interface TopicRepository extends JpaRepository<Topic,Long> {
     @Query("delete Topic t where upper(t.id) = upper(?1)")
     int DeleteTopic(Long id);
 
-    @Query("select t from Topic t")
+    @Query("select t from Topic t ORDER BY t.createdAt")
     List<TopicInfo> TrovaTopic();
 
     @Query("select t from Topic t where t.id = ?1")

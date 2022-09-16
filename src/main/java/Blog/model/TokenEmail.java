@@ -40,7 +40,7 @@ public class TokenEmail {
 
     private LocalDateTime confirmedAt;
 
-    @ManyToOne
+    @OneToOne
     private User user;
 
 }

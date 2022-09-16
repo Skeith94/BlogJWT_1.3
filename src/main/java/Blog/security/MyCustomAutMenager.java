@@ -8,6 +8,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 public class MyCustomAutMenager extends AbstractHttpConfigurer<MyCustomAutMenager, HttpSecurity> {
     @Override
@@ -16,6 +21,7 @@ public class MyCustomAutMenager extends AbstractHttpConfigurer<MyCustomAutMenage
         http.addFilterBefore(new CustomAuthenticationFilter(authenticationManager),UsernamePasswordAuthenticationFilter.class);
 
     }
+
     public static MyCustomAutMenager myCustomAuthenticationManager() {
         return new MyCustomAutMenager();
     }
@@ -24,4 +30,7 @@ public class MyCustomAutMenager extends AbstractHttpConfigurer<MyCustomAutMenage
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }
+

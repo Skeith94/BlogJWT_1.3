@@ -29,6 +29,8 @@ public class ServizioTopic {
         return topicRepository.save(topic);
     }
 
+
+
     public List<TopicInfo> getTopicsAndUserName() {
         return topicRepository.TrovaTopic();
     }

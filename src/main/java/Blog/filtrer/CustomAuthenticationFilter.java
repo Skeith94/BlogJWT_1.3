@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import javax.servlet.FilterChain;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -22,10 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static Blog.loginapplication.*;
@@ -48,14 +51,19 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
         this.authenticationManager = authenticationManager;
     }
 
+
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username= request.getParameter("username");
-        String password= request.getParameter("password");
-        log.info("username e:{}",username);
-        log.info("password e:{}",password);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        return authenticationManager.authenticate(authenticationToken);
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
+        UserLogin authenticationRequest =
+                new ObjectMapper().readValue(request.getInputStream(), UserLogin.class);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                authenticationRequest.getUsername(),
+                authenticationRequest.getPassword()
+        );
+
+        Authentication authenticate = authenticationManager.authenticate(authentication);
+        return authenticate;
     }
 
 
@@ -114,7 +122,8 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
                 .sign(Algorithm.HMAC256(keyHMAC));
 
 
-
+        log.info("login token non cifrato {}",access_token);
+        log.info("refresh token non cifrato {}",refresh_token);
         try {
             access_token = tokenCipher.cipherToken(access_token,keyCiphering);
             refresh_token=  tokenCipher.cipherToken(refresh_token,keyCiphering);
@@ -123,9 +132,12 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
             throw new RuntimeException(e);
         }
 
+
+        List<String> ruoli=user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
+        tokens.put("roles",ruoli.toString());
         response.setContentType(APPLICATION_JSON_VALUE);
 
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
