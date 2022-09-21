@@ -43,19 +43,13 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "vito",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "1234",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"vito\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "localhost:8080/api/login",
@@ -66,6 +60,18 @@
 					"path": [
 						"api",
 						"login"
+					],
+					"query": [
+						{
+							"key": "username ",
+							"value": "vito",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"disabled": true
+						}
 					]
 				}
 			},
