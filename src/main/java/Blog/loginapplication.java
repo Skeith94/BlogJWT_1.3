@@ -94,8 +94,8 @@ public class loginapplication {
 
             User userpeppe=new User(null, "zio peppe", "peppe", "1234", new ArrayList<>(),"peppe@gmail.com");
             userService.saveUser(userpeppe);
-           servizioCommenti.saveCommenti(new Commenti(null,"bestiaa",LocalDateTime.now(),null,userpeppe,topicvito));
-            servizioCommenti.saveCommenti(new Commenti(null,"sei scarso ad apex",LocalDateTime.now(),null,userpeppe,topicdanilo));
+           servizioCommenti.saveCommenti(new Commenti(null,"bestia",LocalDateTime.now(),null,userpeppe,topicvito));
+            servizioCommenti.saveCommenti(new Commenti(null,"sei scarso",LocalDateTime.now(),null,userpeppe,topicdanilo));
 
 
             userService.addRoleToUser("vito", "ROLE_SUPER_ADMIN");
