@@ -1,4 +1,5 @@
 # BlogJWT_1.3
+Parte Back end del blog https://github.com/Skeith94/BlogAngular realizzata con spring boot
 Blog con sicurezza JWT,database MYSQL,possibilitá di postare, commentare in base alle autorizzazioni
 
 Importante se vuoi provare il progetto settare come variabile d'ambiente  emailpass=TUAMAILPASSWORD e modificare email nella classe 
